@@ -69,7 +69,7 @@ server.js
 - `package.json`: Fichier de configuration de Node.js listant les métadonnées du projet et les dépendances.
 - `server.js`: Fichier principal où le serveur Express est configuré et démarré.
 
-# Liste de dépendances couraments utilisées
+# Liste de dépendances
 | Dépendance |  Description                          |
 | :-------: | :----------------------------------------------------------: |
 | axios  | Pour effectuer des request http  |
