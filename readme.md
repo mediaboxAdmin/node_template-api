@@ -1,5 +1,5 @@
 
-## <a name="structure"></a> Structure
+# <a name="structure"></a> Structure
 Bien structurer un projet Node.js avec Express offre plusieurs avantages, tels que la facilité de maintenance, la scalabilité, la lisibilité du code, et la facilité d'ajout de nouvelles fonctionnalités. Voici à quoi pourrait ressembler une bonne structure pour un projet Node.js avec Express :
 <pre>
 - class/
@@ -68,3 +68,27 @@ server.js
 - `package-lock.json`: Fichier généré par npm pour fixer les versions exactes des dépendances.
 - `package.json`: Fichier de configuration de Node.js listant les métadonnées du projet et les dépendances.
 - `server.js`: Fichier principal où le serveur Express est configuré et démarré.
+
+# Liste de dépendances couraments utilisées
+| Dépendance |  Description                          |
+| :-------: | :----------------------------------------------------------: |
+| axios  | Pour effectuer des request http  |
+| bcrypt  | Pour cryptage des mots de passe  |
+| convert-excel-to-json  | Pour lire des fichiers excel et les convertir en json  |
+| cors  | Pour la configuration des cors  |
+| dotenv  | Pour la gestion des fichiers d'environnement  |
+| ejs  | Moteur de template pour nodejs  |
+| i18n  | Internationalisation  |
+| jsonwebtoken  | Gestion des tokens d'authentification  |
+| moment  | Manipulation des dates  |
+| mysql2  | Driver pour gerer mysql  |
+| nodemailer  | Pour envoyer les emails  |
+| nodemon  | Gerer le hotrefresh apres enregistrement du fichier  |
+| pdfkit  | Generer des fichiers pdf  |
+| sequelize  | ORM de gestion d'une base de donnees  |
+| sharp  | Manipulation des images comme la compression  |
+| socket.io  | Gestion des evenements en temps reel  |
+| express-fileupload  | Un middleware pour express qui facilite la gestion de l'upload de fichiers  |
+
+# Nomencleture des fichiers
+## Les routes
