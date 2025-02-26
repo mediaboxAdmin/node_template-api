@@ -9,7 +9,6 @@ const moment = require('moment-timezone');
  * @param {express.Response} res
  * @author eloge257 <nirema.eloge@mdiabox.bi>
  */
-
 const createUtilisateur = async (req, res) => {
   try {
     const { NOM, PRENOM, TELEPHONE, EMAIL, USERNAME, ID_PROFIL, roles, ID_CORP_CORPORATE } = req.body;
