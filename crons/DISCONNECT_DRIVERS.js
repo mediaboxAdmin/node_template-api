@@ -13,28 +13,35 @@ const MILLISECONDS = TIME_TO_DISCONNECT_DRIVER_IN_MINUTES * 60 * 1000
  * @date 28/12/2023
  */
 const DISCONNECT_DRIVERS = (io) => {
-   var interval = setInterval(() => {
-      clearInterval(interval)
-      researchAgain(io)
-   }, 2 * 60 * 1000) // every 2 minutes
+   var interval = setInterval(
+      () => {
+         clearInterval(interval)
+         researchAgain(io)
+      },
+      2 * 60 * 1000,
+   ) // every 2 minutes
 }
 
 const researchAgain = async () => {
    try {
-      await Drivers.update({
-         EN_LIGNE: 0
-      }, {
-         where: {
-            [Op.and]: [
-               { EN_LIGNE: 1 },
-               {
-                  LAST_LOCATION_DATE: {
-                     [Op.lt]: moment(new Date(new Date() - MILLISECONDS)).utc()
-                  }
-               }
-            ]
-         }
-      })
+      // eslint-disable-next-line no-undef
+      await Drivers.update(
+         {
+            EN_LIGNE: 0,
+         },
+         {
+            where: {
+               [Op.and]: [
+                  { EN_LIGNE: 1 },
+                  {
+                     LAST_LOCATION_DATE: {
+                        [Op.lt]: moment(new Date(new Date() - MILLISECONDS)).utc(),
+                     },
+                  },
+               ],
+            },
+         },
+      )
       DISCONNECT_DRIVERS()
    } catch (error) {
       console.log(error)

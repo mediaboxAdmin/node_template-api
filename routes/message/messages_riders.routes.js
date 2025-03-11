@@ -1,5 +1,4 @@
-const express = require('express')
-const mesages_riders_controller = require('../../controllers/message/mesages_riders.controller')
+const express = require("express")
 const messages_riders_routes = express.Router()
 
 // messages_riders_routes.get('/:idCourse', mesages_riders_controller.getMessages)

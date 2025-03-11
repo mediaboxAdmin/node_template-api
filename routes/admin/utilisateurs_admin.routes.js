@@ -1,5 +1,5 @@
-const express = require('express')
-const utilisateur_routes_controller =require('../../controllers/admin/utilisateurs_admin.controller')
+const express = require("express")
+const utilisateur_routes_controller = require("../../controllers/admin/utilisateurs_admin.controller")
 const utilisateur_routes = express.Router()
 
 /**
@@ -7,6 +7,6 @@ const utilisateur_routes = express.Router()
  *@method POST
  * @url /admin/utilisateurs/
  */
- utilisateur_routes.post('/',utilisateur_routes_controller.createUtilisateur)
+utilisateur_routes.post("/", utilisateur_routes_controller.createUtilisateur)
 
- module.exports = utilisateur_routes
+module.exports = utilisateur_routes
