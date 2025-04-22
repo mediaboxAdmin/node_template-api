@@ -1,55 +1,48 @@
 # <a name="structure"></a> Structure
 
 Bien structurer un projet Node.js avec Express offre plusieurs avantages, tels que la facilité de maintenance, la scalabilité, la lisibilité du code, et la facilité d'ajout de nouvelles fonctionnalités. Voici à quoi pourrait ressembler une bonne structure pour un projet Node.js avec Express :
-
 <pre>
-- class/
-  ├─ uploads/
-  │  └─ UsersUpload.js
-  │  └─ AdminUpload.js
-  ├─ Upload.js
-  ├─ Validation.js
-- config/
-  ├─ lang/
-  │  └─ en.json
-  │  └─ fr.json
-  ├─ keys/
-  │  └─ firebase.json
-  ├─ app.js
-- constants/
-  ├─ RESPONSE_CODES.js
-  ├─ RESPONSE_STATUS.js
-- controllers/
-  ├─ auth/
-  ├─ admin/
-  ├─ service/
-- crons/
-  ├─ SENDING_PROMOTIONS_EMAILS.js
-- middlewares/
-  ├─ bindUser.js
-  ├─ requireAuth.js.js
-- models/
-  ├─ User.js
-- node_modules/
-- public/
-- routes/
-  ├─ auth
-  ├─ admin
-  ├─ service
-- socket/
-  ├─ events.js
-  ├─ index.js
-- utils/
-  ├─ sequerize.js
-  ├─ randomInt.js
-- views/
-  ├─ emails
+📂 public
+📂 node_modules
+📂 src
+├── 📂 modules
+│   └── 📂 utilisateurs
+│       └── utilisateur.controller.js
+|       └── Utilisateurs.model.js
+|       └── utilisateurs.routes.js
+|       └── utilisateurs.service.js
+|       └── utilisateurs.upload.js
+|       └── utilisateur.schema.js  
+|       └── index.js
+📂 constants
+│   └── RESPONSE_CODES.js
+│   └── RESPONSE_STATUS.js
+📂 middlewares
+|   └── bindUser.js
+|   └── requireAuth.js.
+|   └── validateSchema.js
+📂 config
+|   └── 📂 lang
+|       └── en.json
+|       └── fr.json
+📂 socket
+|    └── events.socket.js
+|    └── index.socket.js
+📂 crons
+     └── SENDING_PROMOTIONS_EMAILS.js
+📂 utils
+|    └── sequerize.util.js
+|    └── randomInt.util.js
+|    └── upload.util.js
+📂 views
+|    └── 📂  emails
+|        └── utilisateur_enregistre.views.ejs
 .env
 .gitignore
 package-lock.json
 package.json
 server.js
-  </pre>
+</pre>
 
 Voici une description détaillée de chaque répertoire et fichier :
 
