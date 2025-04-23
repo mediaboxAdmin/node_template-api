@@ -30,7 +30,7 @@ Bien structurer un projet Node.js avec Express offre plusieurs avantages, tels q
 |    └── events.socket.js
 |    └── index.socket.js
 📂 crons
-     └── SENDING_PROMOTIONS_EMAILS.js
+     └── sending_promotion_emails.cron.js
 📂 utils
 |    └── sequerize.util.js
 |    └── randomInt.util.js
@@ -140,15 +140,37 @@ const validateSchema = (schema) => async (req, res, next) => {
 utilisateur_routes.post('/utilisateurs', validateSchema(createUtilisateurSchema), (req, res) => { ... });
 </pre>
 
-`Règle 6` : Eviter d'encombrer les controllers. Appliquer tous les logiques dans un 
+`Règle 7` : Évitez d'encombrer les controllers : placez toute la logique dans une couche de services
+
+<pre>
+     // utilisateurs.controller.js
+     async function getUtilisateurs(req, res) {
+          try {
+               const utilisateurs = UtilisateursService.getAllUtilisateurs(req);
+               return res.status(200).json(...)
+          } catch(error) {
+               // retourner l'erreur ici
+          }
+     }
+
+     // utilisateurs.service.js
+     function getAllUtilisateurs(req) {
+          // récuperer les filtres pour les requêtes
+          // appliquer la pagination
+          // récuperer les données de la base de données
+          etc.
+     }
+</pre>
 
 ## Nomenclature des fichiers
 
-`Règle 4` : Le nom d'un fichier contenant une classe doit commencer par une lettre majuscule
+`Règle 8`  : Utilisez toujours un suffixe pour indiquer le rôle ou la responsabilité du fichier par ex: `utilisateurs.controller.js`, `Utilisateur.model.js` ect.
 
-`Règle 5` : Les constantes doivent toujours être écrites en majuscules.
+`Règle 9`  : Le nom d'un fichier contenant une classe doit commencer par une lettre majuscule
 
-`Règle 6`: Le nom d'un fichier de contrôleur doit être en minuscule underscore, suffixé par `.controller.js.` et porté le même nom que la table si possible
+`Règle 10` : Les constantes doivent toujours être écrites en majuscules.
+
+`Règle 11` : Le nom d'un fichier de contrôleur doit être en minuscule underscore et porté le même nom que la table si possible
 
 ```
 ✅ utilisateur.controller.js
@@ -156,34 +178,34 @@ utilisateur_routes.post('/utilisateurs', validateSchema(createUtilisateurSchema)
 ❌ utilisateu_controller.js
 ```
 
-`Règle 7`: Les fichiers des crons doivent toujours être écrites en majuscules.
+`Règle 12`: Par convention, Les noms de fichiers cron doivent toujours être écrits en minuscules.
 
-`Règle 8`: Les fichiers des middlewares doivent toujours être nommés en camelCase.
-
-```
-✅ requireAuth.js
-❌ require_auth.js
-❌ requireauth.js
-```
-
-`Règle 9`: Les fichiers des models doivent toujours commencer par une majuscule.
+`Règle 13`: Les noms de fichiers des middlewares doivent toujours être nommés en camelCase.
 
 ```
-✅ Utilisateurs_tokens.js
-❌ UtilisateursTokens.js
-❌ utilisateurs_tokens.js
+✅ requireAuth.middleware.js
+❌ require_auth.middleware.js
+❌ requireauth.middleware.js
 ```
 
-`Règle 10`: Les fichiers des models doivent être identique avec le nom de la table.
+`Règle 14`: Les noms de fichiers des models doivent toujours commencer par une majuscule.
+
+```
+✅ Utilisateurs_tokens.model.js
+❌ UtilisateursTokens.model.js
+❌ utilisateurs_tokens.model.js
+```
+
+`Règle 15`: Les noms de fichiers des models doivent être identique avec le nom de la table.
 
 ```js
 // Pour la table "utilisateurs"
-✅ Utilisateurs.js
-❌ Utilisateur.js
+✅ Utilisateurs.model.js
+❌ Utilisateur.model.js
 ❌ UtilisateursModel.js
 ```
 
-`Règle 11`: Le nom d'un fichier des routes doit être en minuscule underscore, suffixé par `.routes.js.` et porté le même nom que la table si possible
+`Règle 16`: Le nom d'un fichier des routes doit être en minuscule underscore, suffixé par `.routes.js.` et porté le même nom que la table si possible
 
 ```js
 // Pour la table utilisateurs
@@ -192,17 +214,9 @@ utilisateur_routes.post('/utilisateurs', validateSchema(createUtilisateurSchema)
 ❌ utilisateursroutes.js
 ```
 
-`Règle 12`: Le nom d'un fichier de point d'entrée d'une route doit être nommé en camelCase et suffixé par `Router.js`
+`Règle 17`: Le nom de fichier d'un événement Socket doit être en miniscule et correspondre à l'événement auquel il est associé.
 
-```
-✅ adminRouter.js
-❌ adminrouter.js
-❌ adminrouter.js
-```
-
-`Règle 13`: Le nom de fichier d'un événement Socket doit être en majuscules et correspondre à l'événement auquel il est associé.
-
-`Règle 14`: Le nom de fichier d'un test unitaire doit être en minuscule underscore et suffixé par `.test.js.`
+`Règle 18`: Le nom de fichier d'un test unitaire doit être en minuscule underscore et suffixé par `.test.js.`
 
 ```
 ✅ app.test.js
@@ -212,7 +226,7 @@ utilisateur_routes.post('/utilisateurs', validateSchema(createUtilisateurSchema)
 
 ## Les controllers
 
-`Règle 15`: Chaque fonction doit être commentée en suivant le format de <a href="https://jsdoc.app/">JSDoc</a>
+`Règle 19`: Chaque fonction doit être commentée en suivant le format de <a href="https://jsdoc.app/">JSDoc</a>
 
 ```js
 /**
@@ -225,7 +239,7 @@ utilisateur_routes.post('/utilisateurs', validateSchema(createUtilisateurSchema)
 const createUtilisateur = async (req, res) => {}
 ```
 
-`Règle 16`: Les fonctions doivent être des fonctions fléchées (arrow functions).
+`Règle 20`: Les fonctions doivent être des fonctions fléchées (arrow functions).
 
 ```js
 // ✅ Correct
@@ -239,7 +253,7 @@ async function createUtilisateur(req, res) {
 }
 ```
 
-`Règle 17`: Chaque réponse HTTP doit être au format JSON, défini de la manière suivante :
+`Règle 21`: Chaque réponse HTTP doit être au format JSON, défini de la manière suivante :
 
 ```js
 {
@@ -250,7 +264,7 @@ async function createUtilisateur(req, res) {
 }
 ```
 
-`Règle 18`: Les codes et statuts HTTP doivent provenir des constantes `RESPONSE_CODES` et `RESPONSE_STATUS`.
+`Règle 22`: Les codes et statuts HTTP doivent provenir des constantes `RESPONSE_CODES` et `RESPONSE_STATUS`.
 
 ```js
 // ✅ Correct
@@ -273,7 +287,7 @@ async function createUtilisateur(req, res) {
 
 ## Les modeles
 
-`Règle 19`: Le nom d'un alias dans les associations doit correspondre au nom de la table
+`Règle 23`: Le nom d'un alias dans les associations doit correspondre au nom de la table
 
 ```js
 // ✅ Correct
@@ -286,11 +300,11 @@ Utilisateurs.belongsTo(Profils, { foreignKey: "ID_PROFIL", as: "profil" })
 Utilisateurs.belongsTo(Profils, { foreignKey: "ID_PROFIL", as: "utilisateur_profil" })
 ```
 
-`Règle 20`: Les associations utilisant les mêmes modèles doivent être définies dans le même fichier de modèle afin d’éviter les problèmes de chargement avec Sequelize.
+`Règle 24`: Les associations utilisant les mêmes modèles doivent être définies dans le même fichier de modèle afin d’éviter les problèmes de chargement avec Sequelize.
 
 ## Les routes
 
-`Règle 21`: Les routes doivent toujours être en minuscules.
+`Règle 25`: Les routes doivent toujours être en minuscules.
 
 ```js
 // ✅ Correct
@@ -302,7 +316,7 @@ utilisateur_routes.post("/misajour", utilisateur_routes_controller.createUtilisa
 utilisateur_routes.post("/process/validationEtape", utilisateur_routes_controller.createUtilisateur)
 ```
 
-`Règle 22`: Chaque route définie doit être commentée en suivant le format suivant :
+`Règle 26`: Chaque route définie doit être commentée en suivant le format suivant :
 
 ```js
 /**
